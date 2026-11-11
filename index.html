@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Пробел — найди пробелы в знаниях и репетитора рядом</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;700&family=Unbounded:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eaf0f8;--card:#fff;--ink:#0e1a33;--mut:#5b6784;--acc:#2f4bff;--accink:#fff;--hl:#ffd23f;--line:#d5deec;--ok:#12865a;--mid:#c98500;--gap:#d93a45;--okb:#dff5ea;--midb:#fff1cf;--gapb:#fde1e3}
+@media(prefers-color-scheme:dark){:root{--bg:#0b1226;--card:#141d38;--ink:#eef2fb;--mut:#9aa7c7;--acc:#7d90ff;--accink:#0b1226;--line:#25315a;--ok:#4cd39b;--mid:#f2b73c;--gap:#ff6b75;--okb:#12382c;--midb:#3b2f10;--gapb:#401a22}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.55 Onest,system-ui,sans-serif}
+h1,h2,h3{font-family:Unbounded,Onest,sans-serif;font-weight:700;line-height:1.15;margin:0 0 .5em}
+h1{font-size:clamp(1.9rem,6.5vw,3.2rem);letter-spacing:-.02em}
+h2{font-size:1.35rem}h3{font-size:1.05rem}
+p{margin:0 0 1em}
+button,input,select{font:inherit;color:inherit}
+.wrap{max-width:720px;margin:0 auto;padding:20px 18px 60px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}
+.logo{font:700 1.15rem Unbounded,sans-serif;display:flex;align-items:center;gap:8px}
+.logo i{display:inline-block;width:1.6em;height:.9em;background:var(--hl);border-radius:3px;border-bottom:3px solid var(--ink)}
+.chip{font-size:.85rem;color:var(--mut)}
+.link{background:none;border:0;color:var(--acc);cursor:pointer;text-decoration:underline;padding:4px}
+.gap{display:inline-block;min-width:5.2ch;background:var(--hl);color:#0e1a33;padding:0 .18em;border-radius:6px;border-bottom:.09em solid #0e1a33;transition:opacity .25s}
+.gap.f{opacity:0}
+.lead{font-size:1.1rem;color:var(--mut);max-width:34em}
+.btn{background:var(--acc);color:var(--accink);border:0;border-radius:12px;padding:13px 22px;font-weight:700;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--line)}
+.btn:focus-visible,.opt:focus-visible,.tab:focus-visible,.link:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.dots{display:flex;gap:6px;margin:26px 0}
+.dots b{width:26px;height:6px;border-radius:3px;background:var(--line)}
+.dots b.on{background:var(--acc)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:14px}
+.tabs{display:flex;gap:6px;overflow-x:auto;margin-bottom:20px;padding-bottom:4px}
+.tab{white-space:nowrap;background:transparent;border:2px solid var(--line);border-radius:999px;padding:8px 16px;cursor:pointer;font-weight:500}
+.tab[aria-current=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+label{display:block;font-weight:500;margin:14px 0 6px}
+input[type=text],select,input[type=time]{width:100%;padding:12px;border-radius:10px;border:2px solid var(--line);background:var(--card)}
+.chk{display:flex;gap:10px;align-items:flex-start;font-weight:400;margin-top:18px}
+.chk input{margin-top:5px;width:18px;height:18px}
+.err{color:var(--gap);font-weight:500;min-height:1.5em;margin-top:10px}
+.opt{display:block;width:100%;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px;cursor:pointer;font-size:1.05rem}
+.opt[aria-pressed=true]{border-color:var(--acc);background:var(--bg)}
+.bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin-bottom:18px}
+.bar span{display:block;height:100%;background:var(--acc);transition:width .3s}
+.q{font:700 1.5rem Unbounded,sans-serif;margin:8px 0 18px}
+.tag{display:inline-block;font-size:.8rem;font-weight:700;padding:3px 10px;border-radius:999px;margin-right:6px}
+.tag.ok{background:var(--okb);color:var(--ok)}.tag.mid{background:var(--midb);color:var(--mid)}.tag.gap{background:var(--gapb);color:var(--gap)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.grid .card{margin:0;border-left:6px solid var(--line)}
+.grid .card.ok{border-left-color:var(--ok)}.grid .card.mid{border-left-color:var(--mid)}.grid .card.gap{border-left-color:var(--gap)}
+.mut{color:var(--mut);font-size:.92rem}
+ul{padding-left:1.2em;margin:.4em 0 0}
+.gain{font:700 1.8rem Unbounded,sans-serif;color:var(--ok)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:12px;font-weight:500;max-width:90vw;z-index:9}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<script>
+const QB={
+'9':[
+{k:'a1',q:'Найди сумму квадратов корней уравнения x² − 5x − 14 = 0.',o:['39','53','45','25'],a:1},
+{k:'a2',q:'Цену товара повысили на 25%, а затем снизили на 20%. Как в итоге изменилась цена?',o:['Выросла на 5%','Не изменилась','Снизилась на 5%','Выросла на 2%'],a:1},
+{k:'a3',q:'В прямоугольном треугольнике гипотенуза равна 13, а один катет равен 5. Найди радиус вписанной окружности.',o:['3','2,5','2','4'],a:2},
+{k:'a4',q:'Найди наименьшее значение функции y = x² − 6x + 5.',o:['−4','5','−9','−1'],a:0},
+{k:'a5',q:'Из колоды в 36 карт без возвращения берут две карты. Какова вероятность, что обе — тузы?',o:['1/81','1/90','1/126','1/105'],a:3},
+{k:'a6',q:'Известно, что x + y = 7 и xy = 10. Найди x² + y².',o:['39','29','19','49'],a:1}],
+'10':[
+{k:'b1',q:'Вычисли: log₂ 40 − log₂ 5 + log₃ 81.',o:['5','9','7','4'],a:2},
+{k:'b2',q:'У арифметической прогрессии a₁ = 1, а сумма первых десяти членов равна 145. Найди разность d.',o:['2','3','4','5'],a:1},
+{k:'b3',q:'Вычисли: sin 75° · cos 15° + cos 75° · sin 15°.',o:['1','1/2','√3/2','0'],a:0},
+{k:'b4',q:'Реши уравнение: 4ˣ − 3·2ˣ − 4 = 0.',o:['x = 4','x = 1','x = 2 и x = −1','x = 2'],a:3},
+{k:'b5',q:'Найди наименьшее значение функции f(x) = x³ − 3x на отрезке [0; 2].',o:['0','−2','2','−3'],a:1},
+{k:'b6',q:'Из 8 человек нужно выбрать троих дежурных, но двое из них (А и Б) не могут дежурить вместе. Сколько существует способов?',o:['44','56','50','48'],a:2}],
+'11':[
+{k:'c1',q:'Сколько корней имеет уравнение |x² − 4x| = 3?',o:['2','3','4','5'],a:2},
+{k:'c2',q:'Диагональ основания правильной четырёхугольной пирамиды равна 12, боковое ребро равно 10. Найди объём пирамиды.',o:['144','96','192','240'],a:2},
+{k:'c3',q:'Сколько решений имеет уравнение 2sin²x − sin x − 1 = 0 на отрезке [0; 2π]?',o:['2','3','4','5'],a:1},
+{k:'c4',q:'Составь уравнение касательной к графику y = x³ − 2x в точке с абсциссой x = 1.',o:['y = x − 1','y = 3x − 4','y = x + 2','y = x − 2'],a:3},
+{k:'c5',q:'Вычисли интеграл ∫ (3x² − 2x) dx от 0 до 2.',o:['8','6','4','12'],a:2},
+{k:'c6',q:'Реши неравенство: log₂(x − 1) ≤ 3.',o:['(−∞; 9]','(1; 7]','[1; 9]','(1; 9]'],a:3}],
+'v':[
+{k:'d1',q:'Найди предел: lim (sin 3x) / (5x) при x → 0.',o:['1','5/3','3/5','0'],a:2},
+{k:'d2',q:'Найди определитель матрицы со строками (1, 2, 0), (0, 3, 1), (2, 0, 1).',o:['5','−1','7','1'],a:2},
+{k:'d3',q:'Найди значение производной функции y = x · ln(x² + 1) в точке x = 1.',o:['ln 2','ln 2 + 1','1','2 ln 2'],a:1},
+{k:'d4',q:'Найди сумму бесконечного ряда 1 + 1/3 + 1/9 + 1/27 + …',o:['2','4/3','3/2','3'],a:2},
+{k:'d5',q:'Случайная величина принимает значения 1, 2, 3 с вероятностями 0,2; 0,5; 0,3. Найди её математическое ожидание.',o:['2,0','2,1','2,2','1,8'],a:1},
+{k:'d6',q:'Найди общее решение дифференциального уравнения y′ = 2y.',o:['y = 2eˣ + C','y = C·e^(x/2)','y = x² + C','y = C·e^(2x)'],a:3}]};
+const lv=()=>{const g=(S.user&&S.user.grade)||'';return g.startsWith('9')?'9':g.startsWith('10')?'10':g.startsWith('11')?'11':'v'};
+const QQ=()=>QB[lv()];
+const LV=()=>({'9':'9 класс','10':'10 класс','11':'11 класс',v:'колледж и вуз'})[lv()]+', повышенная сложность';
+const mk=(n,a,root,ask)=>({n,a,root,ask,s:['Разобрать типовую задачу по теме «'+n+'»','Решить 5 задач повышенной сложности']});
+const AR={alg:'Алгебра',num:'Числа и проценты',geo:'Геометрия',fn:'Функции и анализ',prob:'Вероятность'};
+const T={
+a1:mk('Теорема Виета','alg','Формулы Виета','Как выразить x₁² + x₂² через x₁ + x₂ и x₁·x₂?'),
+a2:mk('Проценты подряд','num','Коэффициент роста','Во сколько раз изменится цена, если умножить её на 1,25 и на 0,8?'),
+a3:mk('Вписанная окружность','geo','Свойства прямоугольного треугольника','Как радиус вписанной окружности связан с катетами и гипотенузой?'),
+a4:mk('Парабола','fn','Вершина параболы','Как найти абсциссу вершины параболы y = ax² + bx + c?'),
+a5:mk('Вероятность без возвращения','prob','Умножение вероятностей','Как меняется число карт и число тузов после первой вынутой карты?'),
+a6:mk('Системы уравнений','alg','Сумма и произведение','Как выразить x² + y² через x + y и xy?'),
+b1:mk('Логарифмы','alg','Свойства логарифмов','Во что превращается разность логарифмов с одним основанием?'),
+b2:mk('Арифметическая прогрессия','alg','Сумма n членов','Какая формула суммы подходит, если известны a₁ и d?'),
+b3:mk('Формулы сложения','fn','Тригонометрические тождества','На какую формулу похоже выражение sin α·cos β + cos α·sin β?'),
+b4:mk('Показательные уравнения','alg','Замена переменной','Какая замена t = … упростит уравнение с 4ˣ и 2ˣ?'),
+b5:mk('Экстремумы функции','fn','Производная','В каких точках отрезка нужно сравнить значения функции?'),
+b6:mk('Комбинаторика','prob','Сочетания','Как посчитать все выборки и вычесть запрещённые?'),
+c1:mk('Уравнения с модулем','alg','Раскрытие модуля','На какие два случая раскладывается |A| = 3?'),
+c2:mk('Объём пирамиды','geo','Теорема Пифагора в пространстве','Как найти высоту, если известны полудиагональ основания и боковое ребро?'),
+c3:mk('Тригонометрические уравнения','fn','Квадратное уравнение относительно sin x','Какую замену удобно сделать и какие значения может принимать sin x?'),
+c4:mk('Касательная к графику','fn','Геометрический смысл производной','Что показывает значение производной в точке касания?'),
+c5:mk('Определённый интеграл','fn','Первообразная','Какая первообразная у 3x² − 2x и как применить формулу Ньютона — Лейбница?'),
+c6:mk('Логарифмические неравенства','alg','Область определения','Какое условие нужно записать до решения неравенства?'),
+d1:mk('Пределы','fn','Первый замечательный предел','К какому виду привести sin 3x / 5x, чтобы использовать предел sin t / t?'),
+d2:mk('Определитель 3×3','alg','Разложение по строке','Какая строка или столбец удобнее для разложения?'),
+d3:mk('Производная сложной функции','fn','Правило произведения и цепное правило','Какие два правила нужны для x · ln(x² + 1)?'),
+d4:mk('Бесконечные ряды','fn','Геометрическая прогрессия','При каком условии существует сумма бесконечной геометрической прогрессии?'),
+d5:mk('Математическое ожидание','prob','Закон распределения','Как считается среднее значение величины через вероятности?'),
+d6:mk('Дифференциальные уравнения','fn','Разделение переменных','Как разделить переменные в уравнении y′ = 2y?')};
+const TUT=[
+{n:'Айгерим К.',r:'Жамбылская область',g:18,st:14,p:3500,t:'Объясняет через задачи ЕНТ',k:['num','alg']},
+{n:'Данияр С.',r:'Алматы',g:22,st:21,p:5000,t:'Много практики, разбор ошибок',k:['geo','fn']},
+{n:'Мадина Т.',r:'Астана',g:15,st:9,p:4500,t:'Спокойный темп, начинает с основ',k:['num','alg']},
+{n:'Ерлан Б.',r:'Онлайн',g:20,st:17,p:4000,t:'Занятия по видеосвязи, запись урока',k:['fn','geo','alg']},
+{n:'Алия Н.',r:'Жамбылская область',g:12,st:6,p:3000,t:'Подготовка с 9 класса',k:['geo','alg']},
+{n:'Асель М.',r:'Онлайн',g:16,st:8,p:6000,t:'Вузовская математика и вероятность',k:['prob','fn']}];
+const REG=['Жамбылская область','Алматы','Астана','Шымкент','Карагандинская область','Другой регион'];
+const SL=[
+['Ты знаешь почти всё. Кроме ','Диагностика за 10 минут находит то, что тормозит весь остальной материал, и показывает его на карте.'],
+['Карта пробелов и план на две недели','ИИ не даёт готовые ответы, а задаёт наводящие вопросы. Так тема запоминается, а не списывается.'],
+['Репетитор, который закрывает именно твои пробелы','Рейтинг строится по реальному приросту результата учеников. Репетитор видит твою карту ещё до первого урока.']];
+const $=s=>document.querySelector(s);
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let S={};try{S=JSON.parse(localStorage.getItem('probel'))||{}}catch(e){}
+if(S.user&&S.v!==2){S.ans={};S.v=2}
+const save=()=>{try{localStorage.setItem('probel',JSON.stringify(S))}catch(e){}};
+let V={i:0,tab:'test',qi:0,sel:null,reg:false},timer=null;
+const A=()=>$('#app');
+const st=v=>v===2?['ok','Освоено']:v===1?['mid','Шатко']:['gap','Пробел'];
+const done=()=>!!S.ans&&QQ().every(q=>q.k in S.ans);
+function toast(m){const d=document.createElement('div');d.className='toast';d.setAttribute('role','status');d.textContent=m;document.body.appendChild(d);setTimeout(()=>d.remove(),2600)}
+function head(){return `<div class="top"><div class="logo"><i></i>Пробел</div>${S.user?`<div class="chip">${esc(S.user.name)} · ${esc(S.user.region)} <button class="link" onclick="out()">Выйти</button></div>`:''}</div>`}
+function r(){clearInterval(timer);
+ if(S.user)main();else if(V.reg)reg();else intro();}
+function intro(){const s=SL[V.i];
+ A().innerHTML=head()+`<h1>${V.i===0?s[0]+'<span class="gap" id="gw">дробей</span>.':esc(s[0])}</h1><p class="lead">${s[1]}</p>
+ <div class="dots" aria-hidden="true">${SL.map((_,j)=>`<b class="${j===V.i?'on':''}"></b>`).join('')}</div>
+ <div class="row">${V.i<SL.length-1?`<button class="btn" onclick="V.i++;r()">Дальше</button><button class="btn ghost" onclick="go()">Пропустить</button>`:`<button class="btn" onclick="go()">Создать профиль</button>`}${V.i>0?`<button class="link" onclick="V.i--;r()">Назад</button>`:''}</div>
+ ${V.i===SL.length-1?'<p class="mut" style="margin-top:28px">Это прототип: данные репетиторов демонстрационные.</p>':''}`;
+ if(V.i===0&&!matchMedia('(prefers-reduced-motion:reduce)').matches){const W=['дробей','процентов','уравнений','степеней','функций'];let n=0;const g=$('#gw');
+  timer=setInterval(()=>{g.classList.add('f');setTimeout(()=>{n=(n+1)%W.length;g.textContent=W[n];g.classList.remove('f')},250)},2000)}}
+function go(){V.reg=true;r()}
+function reg(){A().innerHTML=head()+`<h2>Расскажи о себе</h2><p class="mut">Нужно, чтобы подобрать программу и репетиторов в твоём регионе.</p>
+ <div class="card"><label for="nm">Как тебя зовут</label><input type="text" id="nm" autocomplete="given-name">
+ <label for="rg">Регион</label><select id="rg">${REG.map(x=>`<option>${x}</option>`).join('')}</select>
+ <label for="gr">Класс</label><select id="gr">${[9,10,11].map(x=>`<option>${x} класс</option>`).join('')}<option>Колледж или вуз</option></select>
+ <label for="lg">Язык обучения</label><select id="lg"><option>Русский</option><option>Қазақша</option></select>
+ <label for="gl">Цель</label><select id="gl"><option>ЕНТ</option><option>SAT</option><option>Школьные экзамены</option><option>Подтянуть оценки</option></select>
+ <label class="chk"><input type="checkbox" id="cn"><span>Мне есть 18 лет, или родители разрешили мне пользоваться сайтом. Данные хранятся только в моём браузере.</span></label>
+ <div class="err" id="er" role="alert"></div>
+ <div class="row"><button class="btn" onclick="doReg()">Начать диагностику</button><button class="link" onclick="V.reg=false;V.i=0;r()">Назад</button></div></div>`}
+function doReg(){const n=$('#nm').value.trim();
+ if(!n){$('#er').textContent='Напиши имя, чтобы мы знали, как к тебе обращаться.';return}
+ if(!$('#cn').checked){$('#er').textContent='Подтверди согласие, чтобы продолжить.';return}
+ S.user={name:n,region:$('#rg').value,grade:$('#gr').value,lang:$('#lg').value,goal:$('#gl').value};S.ans={};S.sleep=S.sleep||[];S.seen=1;S.v=2;save();V.tab='test';V.qi=0;r()}
+function out(){if(confirm('Выйти и удалить данные с этого устройства?')){S={};save();V={i:0,tab:'test',qi:0,sel:null,reg:false};r()}}
+function main(){const tabs=[['test','Диагностика'],['map','Карта'],['plan','План'],['tut','Репетиторы'],['sleep','Режим']];
+ A().innerHTML=head()+`<nav class="tabs" aria-label="Разделы">${tabs.map(t=>`<button class="tab" aria-current="${V.tab===t[0]}" onclick="V.tab='${t[0]}';r()">${t[1]}</button>`).join('')}</nav><section id="v"></section>`;
+ ({test,map,plan,tut,sleep})[V.tab]()}
+function test(){const v=$('#v');
+ if(V.qi>=QQ().length){v.innerHTML=`<h2>Готово, ${esc(S.user.name)}</h2><p class="lead">Мы нашли, где знания держатся крепко, а где есть пробелы. Посмотри карту.</p><button class="btn" onclick="V.tab='map';r()">Открыть карту пробелов</button> <button class="btn ghost" onclick="S.ans={};save();V.qi=0;r()">Пройти заново</button>`;return}
+ const q=QQ()[V.qi];
+ v.innerHTML=`<div class="mut">Вопрос ${V.qi+1} из ${QQ().length} · математика, ${LV()}</div><div class="bar"><span style="width:${V.qi/QQ().length*100}%"></span></div><div class="q">${q.q}</div>
+ ${q.o.map((o,i)=>`<button class="opt" aria-pressed="${V.sel===i}" onclick="V.sel=${i};test()">${o}</button>`).join('')}
+ ${V.sel!==null?`<p style="margin-top:18px"><b>Насколько ты уверен в ответе?</b></p><div class="row"><button class="btn" onclick="ans(1)">Знаю</button><button class="btn ghost" onclick="ans(0)">Угадал</button></div>`:''}`}
+function ans(c){const q=QQ()[V.qi];S.ans=S.ans||{};S.ans[q.k]=V.sel===q.a?(c?2:1):0;V.qi++;V.sel=null;save();test()}
+function gaps(){return QQ().map(q=>q.k).filter(k=>S.ans[k]<2).sort((a,b)=>S.ans[a]-S.ans[b])}
+function empty(t){$('#v').innerHTML=`<div class="card"><h3>${t}</h3><p class="mut">Сначала пройди короткую диагностику.</p><button class="btn" onclick="V.tab='test';r()">Пройти диагностику</button></div>`}
+function map(){if(!done())return empty('Карты пока нет');
+ const c=[0,0,0];QQ().forEach(q=>c[S.ans[q.k]]++);
+ $('#v').innerHTML=`<h2>Карта пробелов</h2><p class="mut"><span class="tag ok">Освоено ${c[2]}</span><span class="tag mid">Шатко ${c[1]}</span><span class="tag gap">Пробел ${c[0]}</span></p>
+ <div class="grid">${QQ().map(q=>{const s=st(S.ans[q.k]);return `<div class="card ${s[0]}"><h3>${T[q.k].n}</h3><span class="tag ${s[0]}">${s[1]}</span><p class="mut" style="margin:10px 0 0">Корень темы: ${T[q.k].root}</p></div>`}).join('')}</div>
+ <p style="margin-top:20px"><button class="btn" onclick="V.tab='plan';r()">Составить план на 2 недели</button></p>
+ <p class="mut">«Шатко» значит, что ответ верный, но ты не был уверен. Такие темы тоже стоит повторить.</p>`}
+function plan(){if(!done())return empty('Плана пока нет');const g=gaps();
+ if(!g.length){$('#v').innerHTML=`<div class="card"><h3>Пробелов не найдено</h3><p class="mut">Попробуй позже тест посложнее или другой предмет.</p></div>`;return}
+ $('#v').innerHTML=`<h2>План на 2 недели</h2><p class="mut">Начинай с первой темы. Через 4 недели пройди тест ещё раз и сравни результат.</p>
+ ${g.map((k,i)=>{const s=st(S.ans[k]),t=T[k];return `<div class="card"><span class="tag ${s[0]}">${s[1]}</span><h3>${i+1}. ${t.n}</h3><p><b>Сначала ответь сам:</b> ${t.ask}</p><ul>${t.s.map(x=>`<li>${x}</li>`).join('')}</ul></div>`}).join('')}
+ <button class="btn" onclick="V.tab='tut';r()">Нужен живой репетитор</button>`}
+function tut(){if(!done())return empty('Подбор пока невозможен');const g=gaps().map(k=>T[k].a);
+ const L=TUT.filter(t=>t.r===S.user.region||t.r==='Онлайн').map(t=>({...t,m:t.k.filter(k=>g.includes(k))})).sort((a,b)=>b.m.length-a.m.length||b.g-a.g);
+ $('#v').innerHTML=`<h2>Репетиторы для твоих пробелов</h2><p class="mut">Рейтинг — по среднему приросту результата учеников за 4 недели. Сейчас показаны демонстрационные данные.</p>
+ ${L.map(t=>`<div class="card"><div class="row" style="justify-content:space-between"><div><h3>${t.n}</h3><span class="mut">${t.r} · ${t.p.toLocaleString('ru-RU')} ₸ за урок</span></div><div style="text-align:right"><div class="gain">+${t.g}%</div><span class="mut">${t.st} учеников</span></div></div>
+ <p style="margin:12px 0 6px">${t.t}</p><p class="mut" style="margin:0 0 12px">${t.m.length?'Закрывает твои пробелы: '+t.m.map(k=>AR[k]).join(', '):'Твои пробелы не совпали с его темами'}</p>
+ <button class="btn" onclick="toast('Демо: заявка на пробный урок отправлена')">Записаться на пробный урок</button></div>`).join('')}`}
+function sleep(){const L=S.sleep||[],n=L.length;
+ let adv=`<p class="mut">Нужно ещё ${7-n} отметок. Пока выводы были бы слишком неточными.</p>`;
+ if(n>=7){const m=L.slice(-14).map(x=>{const[h,mi]=x.wake.split(':');return +h*60+ +mi});const a=Math.round(m.reduce((x,y)=>x+y,0)/m.length),f=x=>String(Math.floor(x/60)%24).padStart(2,'0')+':'+String(x%60).padStart(2,'0');
+  adv=`<p><b>Предварительно:</b> ты встаёшь около ${f(a)}. Попробуй сложные темы между ${f(a+120)} и ${f(a+300)}, а в другое время решай лёгкие задания. Это предположение, его нужно проверить на тестах в разное время суток.</p>`}
+ $('#v').innerHTML=`<h2>Режим дня</h2><p class="mut">Отмечай подъём и самочувствие каждое утро. После 7 отметок сайт предложит часы для учёбы.</p>
+ <div class="card"><label for="wk">Во сколько ты проснулся</label><input type="time" id="wk" value="07:00">
+ <p style="margin:14px 0 8px"><b>Как самочувствие?</b></p><div class="row"><button class="btn ghost" onclick="log('плохо')">Плохо</button><button class="btn ghost" onclick="log('нормально')">Нормально</button><button class="btn ghost" onclick="log('бодро')">Бодро</button></div></div>
+ <div class="bar"><span style="width:${Math.min(n,7)/7*100}%"></span></div><p class="mut">Отметок: ${Math.min(n,7)} из 7</p>${adv}
+ ${n?`<ul class="mut">${L.slice(-5).reverse().map(x=>`<li>${x.d}: подъём ${x.wake}, ${x.mood}</li>`).join('')}</ul>`:''}`}
+function log(m){const w=$('#wk').value;if(!w){toast('Укажи время подъёма');return}
+ const d=new Date().toLocaleDateString('ru-RU');S.sleep=(S.sleep||[]).filter(x=>x.d!==d);S.sleep.push({d,wake:w,mood:m});save();toast('Отметка сохранена');sleep()}
+r();
+</script>
+</body>
+</html>
